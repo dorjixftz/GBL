@@ -8,7 +8,7 @@
     <link rel="profile" href="https://gmpg.org/xfn/11">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
-    <title>Goa Bumper Lottery 01.12.2024 Result 1PM(Morning) and 8PM(afternoon) </title>
+    <title>Goa Bumper Lottery <span class="dynamic-date"></span> Result 1PM(Morning) and 8PM(afternoon) </title>
     <meta name="description" content="Nagaland state lottery this is the the official site Here You will Get Super Fast Nagaland lotteries ❤️ And Lottery Sambad ❤️ Today">
     <link rel="canonical" href="https://nagalandstatelottery.in/">
     <meta property="og:locale" content="en_US">
@@ -705,4 +705,56 @@ document.addEventListener("DOMContentLoaded", function() {
 
    
   </body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Date Based on Time</title>
+</head>
+<body>
+
+  <p>Today's Date: <span class="today-date"></span></p>
+  <p>1PM Date: <span class="1pm-date"></span></p>
+  <p>8PM Date: <span class="8pm-date"></span></p>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const formatDate = (date) => {
+        const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+        return new Intl.DateTimeFormat('en-GB', options).format(date);
+      };
+
+      const now = new Date();
+      const currentHours = now.getHours();
+      const todayDate = new Date(now); // Current date
+
+      // Default dates for 1PM and 8PM are today
+      let onePmDate = new Date(todayDate);
+      let eightPmDate = new Date(todayDate);
+
+      // Check if it's past 1 PM or 8 PM
+      if (currentHours >= 13 && currentHours < 20) {
+        // Past 1 PM but not yet 8 PM
+        onePmDate = new Date(todayDate); // 1PM is today
+        eightPmDate.setDate(eightPmDate.getDate() - 1); // 8PM is yesterday
+      } else if (currentHours >= 20) {
+        // Past both 1 PM and 8 PM
+        onePmDate = new Date(todayDate); // 1PM is today
+        eightPmDate = new Date(todayDate); // 8PM is today
+      } else {
+        // Before 1 PM
+        onePmDate.setDate(onePmDate.getDate() - 1); // 1PM is yesterday
+        eightPmDate.setDate(eightPmDate.getDate() - 1); // 8PM is yesterday
+      }
+
+      // Update HTML elements with the dates
+      document.querySelector('.today-date').textContent = formatDate(todayDate);
+      document.querySelector('.1pm-date').textContent = formatDate(onePmDate);
+      document.querySelector('.8pm-date').textContent = formatDate(eightPmDate);
+    });
+  </script>
+
+</body>
 </html>
