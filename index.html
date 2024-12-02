@@ -687,9 +687,9 @@
     </script><iframe allow="join-ad-interest-group" data-tagging-id="G-BEHDRY3V0Y" data-load-time="1732769931387" height="0" width="0" src="https://td.doubleclick.net/td/ga/rul?tid=G-BEHDRY3V0Y&amp;gacid=1741823948.1732769931&amp;gtm=45Pe4bk0v9134905239za200&amp;dma=0&amp;gcd=13l3l3l3l1l1&amp;npa=0&amp;pscdl=noapi&amp;aip=1&amp;fledge=1&amp;frm=0&amp;tag_exp=101925629~102067555~102067808~102077855~102081485&amp;z=426872211" style="display: none; visibility: hidden;"></iframe>
 
 document.addEventListener("DOMContentLoaded", function() {
-  const mainNavWrap = document.querySelector(".mh-main-nav-wrap");
+  const mainNavWrap = document.querySelector("div.mh-main-nav-wrap");
   if (mainNavWrap) {
-    const slicknavMenus = mainNavWrap.querySelectorAll(".slicknav_menu");
+    const slicknavMenus = mainNavWrap.querySelectorAll("div.slicknav_menu");
 
     // Check if there are more than one slicknav_menu elements
     if (slicknavMenus.length > 1) {
@@ -702,11 +702,11 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 document.addEventListener("DOMContentLoaded", function() {
-  const mainNavWrap = document.querySelector(".mh-main-nav-wrap");
+  const mainNavWrap = document.querySelector("div.mh-main-nav-wrap");
   
   if (mainNavWrap) {
     const observer = new MutationObserver(function(mutations) {
-      const slicknavMenus = mainNavWrap.querySelectorAll(".slicknav_menu");
+      const slicknavMenus = mainNavWrap.querySelectorAll("div.slicknav_menu");
 
       if (slicknavMenus.length > 1) {
         for (let i = 1; i < slicknavMenus.length; i++) {
