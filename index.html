@@ -705,12 +705,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
    
   </body>
-</html><!DOCTYPE html>
+</html>
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dynamic Date Based on Time</title>
+  <title>Dynamic Date Based on Time (IST)</title>
 </head>
 <body>
 
@@ -719,8 +722,8 @@ document.addEventListener("DOMContentLoaded", function() {
   <p>8PM Date: <span class="8pm-date"></span></p>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      // Function to convert current time to Indian Standard Time (IST)
+    document.addEventListener("DOMContentLoaded", function () {
+      // Function to convert the current time to Indian Standard Time (IST)
       function getISTDate() {
         const now = new Date();
         const utcOffset = now.getTime() + (now.getTimezoneOffset() * 60000); // Convert to UTC
@@ -728,21 +731,23 @@ document.addEventListener("DOMContentLoaded", function() {
         return new Date(utcOffset + istOffset); // Return the IST date
       }
 
-      // Format date in DD/MM/YYYY
+      // Format the date in DD/MM/YYYY format
       function formatDate(date) {
-        const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
-        return new Intl.DateTimeFormat('en-GB', options).format(date);
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
       }
 
-      const istNow = getISTDate();
-      const currentHours = istNow.getHours();
-      const todayDate = new Date(istNow); // Today's date in IST
+      const istNow = getISTDate(); // Get current date-time in IST
+      const currentHours = istNow.getHours(); // Get the current hour in IST
 
-      // Default 1PM and 8PM dates as today's date
-      let onePmDate = new Date(todayDate);
-      let eightPmDate = new Date(todayDate);
+      const todayDate = new Date(istNow); // Today’s date in IST
 
-      // Logic to determine the correct dates for 1 PM and 8 PM
+      let onePmDate = new Date(todayDate); // Default 1 PM date as today
+      let eightPmDate = new Date(todayDate); // Default 8 PM date as today
+
+      // Logic to determine 1 PM and 8 PM dates based on the current time
       if (currentHours >= 13 && currentHours < 20) {
         // Between 1 PM and 8 PM
         onePmDate = new Date(todayDate); // 1 PM is today
@@ -761,9 +766,15 @@ document.addEventListener("DOMContentLoaded", function() {
       document.querySelector('.today-date').textContent = formatDate(todayDate);
       document.querySelector('.1pm-date').textContent = formatDate(onePmDate);
       document.querySelector('.8pm-date').textContent = formatDate(eightPmDate);
+
+      // Debugging information (Optional)
+      console.log("Today's Date:", formatDate(todayDate));
+      console.log("1PM Date:", formatDate(onePmDate));
+      console.log("8PM Date:", formatDate(eightPmDate));
     });
   </script>
 
 </body>
 </html>
+
 
