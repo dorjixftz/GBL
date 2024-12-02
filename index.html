@@ -705,8 +705,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
    
   </body>
-</html>
-<!DOCTYPE html>
+</html><!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -721,35 +720,44 @@ document.addEventListener("DOMContentLoaded", function() {
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      const formatDate = (date) => {
+      // Function to convert current time to Indian Standard Time (IST)
+      function getISTDate() {
+        const now = new Date();
+        const utcOffset = now.getTime() + (now.getTimezoneOffset() * 60000); // Convert to UTC
+        const istOffset = 5.5 * 60 * 60 * 1000; // Add 5 hours 30 minutes for IST
+        return new Date(utcOffset + istOffset); // Return the IST date
+      }
+
+      // Format date in DD/MM/YYYY
+      function formatDate(date) {
         const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
         return new Intl.DateTimeFormat('en-GB', options).format(date);
-      };
+      }
 
-      const now = new Date();
-      const currentHours = now.getHours();
-      const todayDate = new Date(now); // Current date
+      const istNow = getISTDate();
+      const currentHours = istNow.getHours();
+      const todayDate = new Date(istNow); // Today's date in IST
 
-      // Default dates for 1PM and 8PM are today
+      // Default 1PM and 8PM dates as today's date
       let onePmDate = new Date(todayDate);
       let eightPmDate = new Date(todayDate);
 
-      // Check if it's past 1 PM or 8 PM
+      // Logic to determine the correct dates for 1 PM and 8 PM
       if (currentHours >= 13 && currentHours < 20) {
-        // Past 1 PM but not yet 8 PM
-        onePmDate = new Date(todayDate); // 1PM is today
-        eightPmDate.setDate(eightPmDate.getDate() - 1); // 8PM is yesterday
+        // Between 1 PM and 8 PM
+        onePmDate = new Date(todayDate); // 1 PM is today
+        eightPmDate.setDate(eightPmDate.getDate() - 1); // 8 PM is yesterday
       } else if (currentHours >= 20) {
-        // Past both 1 PM and 8 PM
-        onePmDate = new Date(todayDate); // 1PM is today
-        eightPmDate = new Date(todayDate); // 8PM is today
+        // After 8 PM
+        onePmDate = new Date(todayDate); // 1 PM is today
+        eightPmDate = new Date(todayDate); // 8 PM is today
       } else {
         // Before 1 PM
-        onePmDate.setDate(onePmDate.getDate() - 1); // 1PM is yesterday
-        eightPmDate.setDate(eightPmDate.getDate() - 1); // 8PM is yesterday
+        onePmDate.setDate(onePmDate.getDate() - 1); // 1 PM is yesterday
+        eightPmDate.setDate(eightPmDate.getDate() - 1); // 8 PM is yesterday
       }
 
-      // Update HTML elements with the dates
+      // Display the dates on the webpage
       document.querySelector('.today-date').textContent = formatDate(todayDate);
       document.querySelector('.1pm-date').textContent = formatDate(onePmDate);
       document.querySelector('.8pm-date').textContent = formatDate(eightPmDate);
@@ -758,3 +766,4 @@ document.addEventListener("DOMContentLoaded", function() {
 
 </body>
 </html>
+
