@@ -698,12 +698,26 @@ document.addEventListener("DOMContentLoaded", function() {
       // Keep the first element visible and hide the rest
       for (let i = 1; i < slicknavMenus.length; i++) {
         slicknavMenus[i].style.display = "none";
+        slicknavMenus[i].remove();
       }
     }
   }
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+  const mainNavWrap = document.querySelector(".mh-main-nav-wrap");
+  if (mainNavWrap) {
+    const slicknavMenus = mainNavWrap.querySelectorAll(".slicknav_menu");
 
+    // Check if there are more than one slicknav_menu elements
+    if (slicknavMenus.length > 1) {
+      // Keep the first element and remove the rest
+      for (let i = 1; i < slicknavMenus.length; i++) {
+        slicknavMenus[i].remove();
+      }
+    }
+  }
+});
     
   </body>
 </html>
